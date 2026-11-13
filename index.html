@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CES 2027 ラスベガス出張計画書</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans JP', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .hero-bg {
+            background: linear-gradient(rgba(12, 74, 110, 0.8), rgba(2, 132, 199, 0.8)), url('https://images.unsplash.com/photo-1605810731174-84226f3cb8cb?q=80&w=2000&auto=format&fit=crop') center/cover;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .custom-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* 印刷用スタイル */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 8mm; /* 余白を最小限に */
+            }
+            /* 不要なUI要素を非表示 */
+            nav, button, #mobile-menu, footer { display: none !important; }
+            body { background: white; color: #000; font-size: 11px; line-height: 1.4; }
+            
+            /* Web表示用の大きな余白を印刷用に強制的に詰める */
+            .py-12 { padding-top: 0 !important; padding-bottom: 0 !important; }
+            .mb-6 { margin-bottom: 12px !important; }
+            .mb-8 { margin-bottom: 12px !important; }
+            .mt-12 { margin-top: 12px !important; }
+            .p-6, .p-5, .p-4 { padding: 10px !important; }
+            .gap-6 { gap: 12px !important; }
+            .gap-4 { gap: 8px !important; }
+            main.space-y-16 > :not([hidden]) ~ :not([hidden]) { margin-top: 16px !important; }
+            .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 8px !important; }
+            .space-y-5 > :not([hidden]) ~ :not([hidden]) { margin-top: 6px !important; }
+            .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 6px !important; }
+            
+            /* 各セクション・カード・表の行がページを跨がないように制御 */
+            section, .bg-white, .bg-slate-50, .bg-red-50, table, tr {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            /* テーブルの余白調整 */
+            th, td { padding: 6px 8px !important; }
+            
+            /* ヒーローエリア(ヘッダー画像部分)を白黒印刷でも見やすく、極力コンパクトに最適化 */
+            .hero-bg { 
+                background: none !important; 
+                padding-top: 0px !important; 
+                padding-bottom: 10px !important; 
+                border-bottom: 2px solid #000;
+            }
+            .hero-bg h1 { font-size: 20px !important; margin-bottom: 4px !important; color: #000 !important; }
+            .hero-bg p { font-size: 12px !important; margin-bottom: 8px !important; color: #333 !important; }
+            .hero-bg .grid { margin-top: 8px !important; padding-top: 8px !important; border-color: #ccc !important; }
+            .hero-bg span, .hero-bg i, .hero-bg div { color: #333 !important; }
+            
+            /* タイトルサイズ調整 */
+            h2 { font-size: 15px !important; margin-bottom: 8px !important; }
+            h3, h4 { font-size: 12px !important; margin-bottom: 4px !important; }
+
+            /* 画像高さ削減 */
+            .h-40 { height: 60px !important; }
+            
+            /* 影を消し、実線ボーダーにして紙での視認性を向上 */
+            .shadow-sm, .shadow-md, .shadow-lg { box-shadow: none !important; border: 1px solid #999 !important; }
+            .rounded-xl, .rounded-lg { border-radius: 4px !important; }
+            
+            /* テキストのコントラストを上げる */
+            .text-slate-500, .text-slate-600 { color: #333 !important; }
+            .text-sm { font-size: 10px !important; }
+            .text-base { font-size: 11px !important; }
+            
+            /* カラムレイアウトを印刷時も維持 */
+            .grid { display: grid !important; }
+            .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+            .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+            .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+            .lg\:col-span-2 { grid-column: span 2 / span 2 !important; }
+            
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-sans">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white shadow-sm" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 gap-4">
+                <div class="flex items-center flex-shrink-0">
+                    <i class="fa-solid fa-plane-departure text-brand-600 text-xl mr-2"></i>
+                    <span class="font-bold text-xl tracking-tight text-slate-900">出張計画書 <span class="font-light text-slate-500 text-sm ml-1">CES 2027</span></span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center justify-end flex-1 min-w-0">
+                    <div class="flex items-center space-x-5 text-sm font-medium text-slate-600 overflow-x-auto custom-scrollbar whitespace-nowrap pr-4">
+                        <a href="#basic-info" class="hover:text-brand-600 transition">基本</a>
+                        <a href="#preparation" id="nav-prep-desktop" class="hover:text-brand-600 transition">準備</a>
+                        <a href="#schedule" class="hover:text-brand-600 transition">日程</a>
+                        <a href="#arrangements" class="hover:text-brand-600 transition">手配</a>
+                        <a href="#belongings" id="nav-belongings-desktop" class="hover:text-brand-600 transition">持物</a>
+                        <a href="#local-info" id="nav-local-desktop" class="hover:text-brand-600 transition">現地</a>
+                        <a href="#phrases" id="nav-phrases-desktop" class="hover:text-brand-600 transition">会話</a>
+                        <a href="#emergency" class="hover:text-red-600 transition text-red-600 font-semibold"><i class="fa-solid fa-triangle-exclamation mr-1"></i>緊急</a>
+                    </div>
+                    <div class="flex items-center space-x-3 flex-shrink-0 border-l border-slate-200 pl-4">
+                        <button id="mode-toggle-btn" class="px-4 py-2 rounded-full border border-slate-300 text-slate-700 hover:bg-slate-50 transition font-medium text-sm flex items-center bg-white shadow-sm"><i class="fa-solid fa-file-export mr-2"></i>提出用</button>
+                        <button onclick="window.print()" class="bg-[#4a7cd2] hover:bg-blue-600 text-white px-5 py-2 rounded-full transition shadow-sm font-medium text-sm flex items-center">
+                            <i class="fa-solid fa-print mr-2"></i>印刷/PDF
+                        </button>
+                    </div>
+                </div>
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center lg:hidden flex-shrink-0">
+                    <button id="mobile-menu-btn" class="text-slate-500 hover:text-slate-900 focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full max-h-[85vh] overflow-y-auto custom-scrollbar">
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <a href="#basic-info" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">基本</a>
+                <a href="#preparation" id="nav-prep-mobile" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">準備</a>
+                <a href="#schedule" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">日程</a>
+                <a href="#arrangements" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">手配</a>
+                <a href="#belongings" id="nav-belongings-mobile" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">持物</a>
+                <a href="#local-info" id="nav-local-mobile" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">現地</a>
+                <a href="#phrases" id="nav-phrases-mobile" class="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-brand-600">会話</a>
+                <a href="#emergency" class="block px-3 py-3 rounded-md text-base font-medium text-red-600 hover:bg-red-50"><i class="fa-solid fa-triangle-exclamation mr-1"></i>緊急</a>
+                <div class="border-t border-slate-100 mt-2 pt-2">
+                    <button id="mobile-mode-toggle-btn" class="w-full text-left block px-3 py-3 rounded-md text-base font-medium border border-slate-300 text-slate-700 hover:bg-slate-50 flex items-center"><i class="fa-solid fa-file-export mr-2"></i>提出用</button>
+                    <button onclick="window.print()" class="w-full text-left mt-2 block px-3 py-3 rounded-md text-base font-medium text-white bg-[#4a7cd2] hover:bg-blue-600 flex items-center"><i class="fa-solid fa-print mr-2"></i>印刷/PDF保存</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero -->
+    <header class="hero-bg pt-28 pb-16 px-4 sm:px-6 lg:px-8 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-sm font-medium mb-4 border border-white/30">
+                <i class="fa-regular fa-calendar mr-2"></i>2027年1月5日 - 1月10日
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold mb-4 tracking-tight">ラスベガス出張計画書</h1>
+            <p class="text-xl text-blue-100 font-light mb-8">CES 2027 参加および最新テクノロジー動向調査</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm mt-8 border-t border-white/20 pt-6">
+                <div><span class="text-blue-200 block mb-1">作成日</span>2026年10月7日</div>
+                <div><span class="text-blue-200 block mb-1">対象者</span>参加メンバー9名</div>
+                <div><span class="text-blue-200 block mb-1">ステータス</span><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">確定スケジュール</span></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+        
+        <!-- 1. 基本情報 -->
+        <section id="basic-info" class="scroll-mt-24">
+            <h2 class="text-2xl font-bold text-slate-800 border-l-4 border-brand-500 pl-4 mb-6 flex items-center">
+                <span class="bg-brand-100 text-brand-700 rounded-full w-8 h-8 inline-flex items-center justify-center text-sm mr-3">1</span>出張基本情報
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- 概要カード -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="p-6 space-y-5">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1"><i class="fa-regular fa-clock text-slate-400 w-6 text-center"></i></div>
+                            <div class="ml-4">
+                                <h4 class="text-sm font-medium text-slate-500">期間</h4>
+                                <p class="text-base text-slate-900 font-medium">2027年1月5日(火) 〜 1月9日(土)</p>
+                                <p class="text-xs text-slate-500 mt-1">※現地時間 (日本到着: 1月10日)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1"><i class="fa-solid fa-location-dot text-slate-400 w-6 text-center"></i></div>
+                            <div class="ml-4">
+                                <h4 class="text-sm font-medium text-slate-500">開催地</h4>
+                                <p class="text-base text-slate-900 font-medium">アメリカ合衆国 ラスベガス</p>
+                                <p class="text-sm text-slate-600 mt-1">Las Vegas Convention Center (LVCC), Venetian Expo 等</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1"><i class="fa-solid fa-users text-slate-400 w-6 text-center"></i></div>
+                            <div class="ml-4">
+                                <h4 class="text-sm font-medium text-slate-500">参加メンバー (9名)</h4>
+                                <p class="text-base text-slate-900 mt-1">
+                                    <span class="inline-block bg-slate-100 rounded px-2 py-1 mr-2 mb-2 text-sm">小柳 雄司</span>
+                                    <span class="inline-block bg-slate-100 rounded px-2 py-1 mr-2 mb-2 text-sm">日比 俊介</span>
+                                    <span class="inline-block bg-slate-100 rounded px-2 py-1 mr-2 mb-2 text-sm">香川 祐治</span>
+                                    <span class="inline-block bg-slate-100 rounded px-2 py-1 mr-2 mb-2 text-sm">高橋 渉</span>
+                                    <span class="inline-block bg-slate-100 rounded px-2 py-1 mr-2 mb-2 text-sm">加藤 千尋</span>
+                                    <span class="inline-block bg-slate-100 rounded px-2 py-1 mr-2 mb-2 text-sm">末田 風太</span>
+                                    <span class="inline-block bg-slate-100 rounded px-2 py-1 mr-2 mb-2 text-sm">山岸 良章</span>
+                                    <span class="inline-block bg-slate-100 rounded px-2 py-1 mr-2 mb-2 text-sm">山中 啓悟</span>
+                                    <span class="inline-block bg-slate-100 rounded px-2 py-1 mr-2 mb-2 text-sm">後藤 宏一朗</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 目的カード -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-4 flex items-center">
+                        <i class="fa-solid fa-bullseye text-brand-500 mr-2"></i>出張目的
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <span class="font-medium text-slate-800">CES 2027 参加</span>
+                                <p class="text-sm text-slate-600 mt-1">基調講演、最新技術展示（Expo）見学、スタートアップエリア（Eureka Park）視察、ネットワーキング</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <span class="font-medium text-slate-800">最新情報・海外事例調査</span>
+                                <p class="text-sm text-slate-600 mt-1">建設DX・AI活用の最新動向および海外先進企業の取り組み事例の収集</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <span class="font-medium text-slate-800">特別企画・パートナーミーティング</span>
+                                <p class="text-sm text-slate-600 mt-1">関連企業との情報交換、技術セッションへの出席、コミュニティ交流</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-check text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <span class="font-medium text-slate-800">CADDi主催「モノづくり未来会議2027」への出席</span>
+                                <p class="text-sm text-slate-600 mt-1">製造・建設関連の最新事例や未来動向をテーマとしたイベントでの知見獲得</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 事前準備 (NEW) -->
+        <section id="preparation" class="scroll-mt-24">
+            <h2 class="text-2xl font-bold text-slate-800 border-l-4 border-brand-500 pl-4 mb-6 flex items-center">
+                <span class="bg-brand-100 text-brand-700 rounded-full w-8 h-8 inline-flex items-center justify-center text-sm mr-3">2</span>事前準備
+            </h2>
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <ul class="space-y-6">
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-passport text-brand-500 mt-1 mr-4 text-xl w-6 text-center"></i>
+                        <div>
+                            <span class="font-bold text-slate-800 block text-lg">パスポートの申請・更新</span>
+                            <p class="text-sm text-slate-600 mt-1">有効期限が滞在期間を満たしているか確認し、必要な場合は速やかに申請してください。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-file-shield text-brand-500 mt-1 mr-4 text-xl w-6 text-center"></i>
+                        <div>
+                            <span class="font-bold text-slate-800 block text-lg">ESTAの登録</span>
+                            <p class="text-sm text-slate-600 mt-1 mb-1">
+                                <a href="https://esta.cbp.dhs.gov/" target="_blank" class="text-brand-600 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square text-xs mr-1"></i>https://esta.cbp.dhs.gov/</a>
+                            </p>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800"><i class="fa-solid fa-circle-exclamation mr-1"></i>公式アプリのダウンロード推奨</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-id-badge text-brand-500 mt-1 mr-4 text-xl w-6 text-center"></i>
+                        <div>
+                            <span class="font-bold text-slate-800 block text-lg">CESの登録</span>
+                            <p class="text-sm text-slate-600 mt-1 mb-1">
+                                <a href="https://www.ces.tech/" target="_blank" class="text-brand-600 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square text-xs mr-1"></i>https://www.ces.tech/</a>
+                            </p>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">※CADDiイベント参加者は招待コードあり</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-plane-up text-brand-500 mt-1 mr-4 text-xl w-6 text-center"></i>
+                        <div>
+                            <span class="font-bold text-slate-800 block text-lg">飛行機予約</span>
+                            <p class="text-sm text-slate-600 mt-1">「手配情報」に記載の便を予約してください。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-hotel text-brand-500 mt-1 mr-4 text-xl w-6 text-center"></i>
+                        <div>
+                            <span class="font-bold text-slate-800 block text-lg">ホテル予約</span>
+                            <p class="text-sm text-slate-600 mt-1">CES登録画面より「Hilton at Resorts World」を予約してください。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-plane-circle-check text-brand-500 mt-1 mr-4 text-xl w-6 text-center"></i>
+                        <div class="w-full">
+                            <span class="font-bold text-slate-800 block text-lg">アメリカン航空登録</span>
+                            <p class="text-sm text-slate-600 mt-1 mb-1 break-all">
+                                <a href="https://www.aa.com/ja-jp/flights?c=SEM%7CGOOG%7Calways_on%7CMKT%7CAPM%7CPMX%7CJP_APAC_MKT_Google_PMax_X_JP_X_Oct2026Sale$$&gclsrc=aw.ds&gad_source=1&gad_campaignid=20454385436&gbraid=0AAAAADd54V_1Qcs3DRP33-NvGnsBNi3Uz&gclid=CjwKCAjw0LzWBhBOEiwAKQd0cD613gSTDk9Jn--HXlqgTzzkO2TjaHs0NFqi_HfgBj4d690P8WXsMBoCGksQAvD_BwE" target="_blank" class="text-brand-600 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square text-xs mr-1"></i>公式サイトへ（登録画面）</a>
+                            </p>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800"><i class="fa-solid fa-circle-exclamation mr-1"></i>アプリダウンロード推奨</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-solid fa-mobile-screen-button text-brand-500 mt-1 mr-4 text-xl w-6 text-center"></i>
+                        <div>
+                            <span class="font-bold text-slate-800 block text-lg">Visit Japan Webの登録</span>
+                            <p class="text-sm text-slate-600 mt-1 mb-1">
+                                <a href="https://services.digital.go.jp/visit-japan-web/" target="_blank" class="text-brand-600 hover:underline"><i class="fa-solid fa-arrow-up-right-from-square text-xs mr-1"></i>https://services.digital.go.jp/visit-japan-web/</a>
+                            </p>
+                            <p class="text-xs text-slate-500">日本への帰国手続き（税関申告等）のため事前に登録を済ませてください。</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fa-brands fa-uber text-brand-500 mt-1 mr-4 text-xl w-6 text-center"></i>
+                        <div>
+                            <span class="font-bold text-slate-800 block text-lg">Uberアプリのダウンロードと登録</span>
+                            <p class="text-sm text-slate-600 mt-1">現地での主要な移動手段となります。出発前にアプリをダウンロードし、アカウント登録とクレジットカード等の決済情報の設定を完了させてください。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3. 全体スケジュール -->
+        <section id="schedule" class="scroll-mt-24">
+            <h2 class="text-2xl font-bold text-slate-800 border-l-4 border-brand-500 pl-4 mb-6 flex items-center">
+                <span class="bg-brand-100 text-brand-700 rounded-full w-8 h-8 inline-flex items-center justify-center text-sm mr-3">3</span>全体スケジュール
+            </h2>
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-sm text-slate-500 font-medium">
+                                <th class="p-4 w-1/4">日付</th>
+                                <th class="p-4 w-3/5">主な予定・イベント</th>
+                                <th class="p-4 w-1/5">対象者</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <!-- Day 1 -->
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-slate-800 text-base">1/5 (火)</div>
+                                    <div class="text-xs text-slate-500 mt-1">移動日</div>
+                                </td>
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-brand-600 mb-1">日本(羽田)出発 → ラスベガス到着</div>
+                                    <p class="text-slate-600 mb-2">羽田17:05発 → LAX経由 → ラスベガス 13:44着。</p>
+                                    <p class="text-slate-600">ホテル移動、チェックイン、CESバッジピックアップ等。</p>
+                                </td>
+                                <td class="p-4 align-top">
+                                    <span class="bg-slate-100 text-slate-700 py-1 px-3 rounded-full text-xs font-medium">全員(9名)</span>
+                                </td>
+                            </tr>
+                            <!-- Day 2 (1/6) -->
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-slate-800 text-base">1/6 (水)</div>
+                                    <div class="text-xs text-brand-500 font-medium mt-1">CES 2027</div>
+                                </td>
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-brand-600 mb-2 text-lg">CES 2027 視察</div>
+                                    <p class="text-slate-600">終日: CES各会場にて展示（Expo）、基調講演、セッション等の視察・参加。</p>
+                                </td>
+                                <td class="p-4 align-top">
+                                    <span class="bg-slate-100 text-slate-700 py-1 px-3 rounded-full text-xs font-medium">全員(9名)</span>
+                                </td>
+                            </tr>
+                            <!-- Day 3 (1/7) -->
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition bg-brand-50/30">
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-slate-800 text-base">1/7 (木)</div>
+                                    <div class="text-xs text-brand-500 font-medium mt-1">イベント / CES</div>
+                                </td>
+                                <td class="p-4 align-top space-y-4">
+                                    <div class="bg-white p-4 rounded-lg border border-brand-200 shadow-sm relative overflow-hidden">
+                                        <div class="absolute top-0 left-0 w-1 h-full bg-brand-500"></div>
+                                        <div class="font-semibold text-brand-700 mb-1 text-base">モノづくり未来会議2027</div>
+                                        <p class="text-sm font-medium text-amber-600 mb-2"><i class="fa-regular fa-clock mr-1"></i>13:30 - 20:00</p>
+                                        <p class="text-slate-600 text-sm">CADDi主催イベントへの参加・情報交換 (※参加者以外は終日CES視察。会議参加者も午前中はCES視察可能)</p>
+                                    </div>
+                                </td>
+                                <td class="p-4 align-top space-y-3">
+                                    <div>
+                                        <div class="text-xs text-slate-500 mb-1">会議参加 (6名)</div>
+                                        <span class="bg-blue-100 text-blue-800 py-1 px-2 rounded text-xs font-medium inline-block shadow-sm">小柳, 日比, 香川, 高橋, 加藤, 末田</span>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-slate-500 mb-1">CES専念 (3名)</div>
+                                        <span class="bg-slate-100 text-slate-700 py-1 px-2 rounded text-xs font-medium inline-block border">山岸, 山中, 後藤</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Day 4 (1/8) -->
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-slate-800 text-base">1/8 (金)</div>
+                                    <div class="text-xs text-brand-500 font-medium mt-1">CES 2027</div>
+                                </td>
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-brand-600 mb-2 text-lg">CES 2027 視察</div>
+                                    <p class="text-slate-600">終日: CES各会場にて展示・セッション視察およびネットワーキング。</p>
+                                </td>
+                                <td class="p-4 align-top">
+                                    <span class="bg-slate-100 text-slate-700 py-1 px-3 rounded-full text-xs font-medium">全員(9名)</span>
+                                </td>
+                            </tr>
+                            <!-- Day 5 -->
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-slate-800 text-base">1/9 (土)</div>
+                                    <div class="text-xs text-slate-500 mt-1">帰国日</div>
+                                </td>
+                                <td class="p-4 align-top space-y-4">
+                                    <div class="bg-slate-50 p-3 rounded-md border border-slate-200">
+                                        <div class="font-semibold text-slate-800 mb-1"><i class="fa-solid fa-plane-departure mr-2 text-slate-400"></i>【帰国便】</div>
+                                        <p class="text-slate-600">LAS 06:53発 → LAX経由 → 羽田1/10着</p>
+                                    </div>
+                                </td>
+                                <td class="p-4 align-top">
+                                    <span class="bg-slate-100 text-slate-700 py-1 px-3 rounded-full text-xs font-medium">全員(9名)</span>
+                                </td>
+                            </tr>
+                            <!-- Day 6 -->
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-4 align-top">
+                                    <div class="font-semibold text-slate-800 text-base">1/10 (日)</div>
+                                    <div class="text-xs text-slate-500 mt-1">日本到着・解散</div>
+                                </td>
+                                <td class="p-4 align-top">
+                                    <ul class="space-y-2 text-slate-600">
+                                        <li class="flex items-center"><i class="fa-solid fa-plane-arrival w-6 text-slate-400"></i> 15:05 羽田空港(HND)到着・解散</li>
+                                    </ul>
+                                </td>
+                                <td class="p-4 align-top">
+                                    <span class="bg-slate-100 text-slate-700 py-1 px-3 rounded-full text-xs font-medium">全員(9名)</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 手配情報 -->
+        <section id="arrangements" class="scroll-mt-24">
+            <h2 class="text-2xl font-bold text-slate-800 border-l-4 border-brand-500 pl-4 mb-6 flex items-center">
+                <span class="bg-brand-100 text-brand-700 rounded-full w-8 h-8 inline-flex items-center justify-center text-sm mr-3">4</span>手配情報 (フライト・宿泊)
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- フライト情報 -->
+                <div class="lg:col-span-2 space-y-6">
+                    <h3 class="text-lg font-semibold text-slate-800 flex items-center border-b pb-2">
+                        <i class="fa-solid fa-plane text-brand-500 mr-2"></i>フライト情報
+                    </h3>
+                    
+                    <!-- 往路 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                        <div class="flex justify-between items-center border-b border-slate-100 pb-3 mb-3">
+                            <h4 class="font-bold text-slate-800">往路 (全員9名)</h4>
+                            <span class="text-sm font-medium bg-slate-100 px-3 py-1 rounded text-slate-600">1月5日(火)</span>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row items-center justify-between text-sm md:text-base gap-4">
+                            <div class="flex-1 text-center md:text-left">
+                                <div class="font-bold text-xl text-slate-800">HND <span class="text-xs font-normal text-slate-500">羽田</span></div>
+                                <div class="font-semibold text-brand-600">17:05</div>
+                            </div>
+                            <div class="flex-1 px-4 w-full relative group">
+                                <div class="h-0.5 bg-slate-300 w-full rounded relative">
+                                    <i class="fa-solid fa-plane text-slate-400 absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-center">
+                                <div class="font-bold text-xl text-slate-800">LAX <span class="text-xs font-normal text-slate-500">乗継</span></div>
+                                <div class="font-semibold text-brand-600">10:05</div>
+                            </div>
+                            <!-- 乗り継ぎ矢印 -->
+                            <div class="hidden md:block flex-shrink-0 text-slate-300"><i class="fa-solid fa-chevron-right"></i></div>
+                            <!-- 乗り継ぎ後 -->
+                            <div class="flex-1 text-center mt-4 md:mt-0">
+                                <div class="font-bold text-xl text-slate-800">LAX <span class="text-xs font-normal text-slate-500">乗継</span></div>
+                                <div class="font-semibold text-brand-600">12:22</div>
+                            </div>
+                            <div class="flex-1 px-2 w-full relative">
+                                <div class="h-0.5 bg-slate-300 w-full rounded relative">
+                                    <i class="fa-solid fa-plane text-slate-400 absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-center md:text-right">
+                                <div class="font-bold text-xl text-slate-800">LAS <span class="text-xs font-normal text-slate-500">到着</span></div>
+                                <div class="font-semibold text-brand-600">13:44</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 復路 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                        <div class="flex justify-between items-center border-b border-slate-100 pb-3 mb-3">
+                            <h4 class="font-bold text-slate-800">復路 (全員9名)</h4>
+                            <span class="text-sm font-medium bg-blue-100 text-blue-800 px-3 py-1 rounded">1月9日(土)</span>
+                        </div>
+                        
+                        <div class="flex flex-col md:flex-row items-center justify-between text-sm md:text-base gap-4">
+                            <div class="flex-1 text-center md:text-left">
+                                <div class="font-bold text-xl text-slate-800">LAS <span class="text-xs font-normal text-slate-500">出発</span></div>
+                                <div class="font-semibold text-brand-600">06:53</div>
+                            </div>
+                            <div class="flex-1 px-4 w-full relative group">
+                                <div class="h-0.5 bg-slate-300 w-full rounded relative">
+                                    <i class="fa-solid fa-plane text-slate-400 absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-center">
+                                <div class="font-bold text-xl text-slate-800">LAX <span class="text-xs font-normal text-slate-500">乗継</span></div>
+                                <div class="font-semibold text-brand-600">08:15</div>
+                            </div>
+                            <!-- 乗り継ぎ矢印 -->
+                            <div class="hidden md:block flex-shrink-0 text-slate-300"><i class="fa-solid fa-chevron-right"></i></div>
+                            <!-- 乗り継ぎ後 -->
+                            <div class="flex-1 text-center mt-4 md:mt-0">
+                                <div class="font-bold text-xl text-slate-800">LAX <span class="text-xs font-normal text-slate-500">乗継</span></div>
+                                <div class="font-semibold text-brand-600">10:15</div>
+                            </div>
+                            <div class="flex-1 px-2 w-full relative">
+                                <div class="h-0.5 bg-slate-300 w-full rounded relative">
+                                    <i class="fa-solid fa-plane text-slate-400 absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 text-xs"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-center md:text-right">
+                                <div class="font-bold text-xl text-slate-800">HND <span class="text-xs font-normal text-slate-500">到着</span></div>
+                                <div class="font-semibold text-brand-600">15:05 <sup class="text-[10px]">+1</sup></div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500 text-right mt-3">※翌日 1/10(日) 15:05 羽田到着</p>
+                    </div>
+                </div>
+
+                <!-- 宿泊先情報 -->
+                <div class="lg:col-span-1">
+                    <h3 class="text-lg font-semibold text-slate-800 flex items-center border-b pb-2 mb-6">
+                        <i class="fa-solid fa-hotel text-brand-500 mr-2"></i>宿泊先情報
+                    </h3>
+                    
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden h-full">
+                        <div class="h-40 bg-slate-200 relative">
+                            <!-- プレースホルダー画像 (Hilton) -->
+                            <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?q=80&w=800&auto=format&fit=crop" alt="Hilton at Resorts World" class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
+                                <h4 class="text-white font-bold text-lg leading-tight">Las Vegas Hilton at Resorts World</h4>
+                                <p class="text-white/80 text-xs mt-1">ヒルトン アット リゾートワールド</p>
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-4 text-sm">
+                            <div class="flex items-start">
+                                <i class="fa-solid fa-map-location-dot text-slate-400 w-6 mt-1"></i>
+                                <a href="https://maps.google.com/?q=999+Resorts+World+Ave,+Las+Vegas,+NV+89109" target="_blank" class="text-brand-600 hover:underline">
+                                    999 Resorts World Ave, <br>Las Vegas, NV 89109
+                                </a>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-phone text-slate-400 w-6"></i>
+                                <div>
+                                    <p class="text-slate-800 font-medium">+1 (702) 676-7000</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fa-solid fa-globe text-slate-400 w-6"></i>
+                                <a href="https://www.hilton.com/en/hotels/lashhhh-las-vegas-hilton-at-resorts-world/" target="_blank" class="text-brand-600 hover:underline break-all">
+                                    公式サイトを開く
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 持ち物リスト -->
+        <section id="belongings" class="scroll-mt-24">
+            <h2 class="text-2xl font-bold text-slate-800 border-l-4 border-brand-500 pl-4 mb-6 flex items-center">
+                <span class="bg-brand-100 text-brand-700 rounded-full w-8 h-8 inline-flex items-center justify-center text-sm mr-3">5</span>持ち物リスト
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 重要書類・貴重品 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                    <h3 class="font-bold text-red-700 border-b border-slate-100 pb-2 mb-4">重要書類・貴重品</h3>
+                    <ul class="space-y-3 text-sm text-slate-700">
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> パスポート</li>
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> パスポートコピー (印刷)</li>
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> 海外旅行保険証 (印刷)</li>
+                    </ul>
+                </div>
+
+                <!-- 電子機器 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                    <h3 class="font-bold text-purple-700 border-b border-slate-100 pb-2 mb-4">電子機器・金銭</h3>
+                    <ul class="space-y-3 text-sm text-slate-700">
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> クレジットカード (複数枚)</li>
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> <div>現金 (USD) <span class="text-xs text-slate-500 block">※基本カード払いなのでチップ用</span></div></li>
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> スマホ・充電器</li>
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> <div>モバイルバッテリー <span class="text-xs text-red-500 block">※預入不可。機内持込はOK</span></div></li>
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> <div>WIFI機器 <span class="text-xs text-amber-600 block">※ポケットWIFIもしくはeSIMの事前申し込み必須</span></div></li>
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> <div>パソコン <span class="text-xs text-slate-500 block">※CESでの使用はないので必要な方のみ</span></div></li>
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> <div>変圧器 <span class="text-xs text-slate-500 block">※スマホやPCは不要、他家電充電の場合必要</span></div></li>
+                    </ul>
+                </div>
+
+                <!-- 衣類・日用品 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                    <h3 class="font-bold text-green-700 border-b border-slate-100 pb-2 mb-4">衣類・日用品</h3>
+                    <ul class="space-y-3 text-sm text-slate-700">
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> 着替え</li>
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> <div>歯ブラシ・歯磨き粉 <span class="text-xs text-slate-500 block">※ホテルにないので必須</span></div></li>
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> 常備薬</li>
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> <div>スリッパ <span class="text-xs text-slate-500 block">※ホテルにないので推奨</span></div></li>
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> <div>マスク <span class="text-xs text-slate-500 block">※機内・現地の乾燥対策</span></div></li>
+                    </ul>
+                </div>
+
+                <!-- 業務関連 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                    <h3 class="font-bold text-slate-700 border-b border-slate-100 pb-2 mb-4">業務関連</h3>
+                    <ul class="space-y-3 text-sm text-slate-700">
+                        <li class="flex items-start cursor-pointer hover:bg-slate-50 p-1 rounded transition"><input type="checkbox" class="mt-1 mr-3 w-4 h-4 text-brand-600 rounded border-slate-300"> 名刺</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 現地情報・注意事項 -->
+        <section id="local-info" class="scroll-mt-24">
+            <h2 class="text-2xl font-bold text-slate-800 border-l-4 border-brand-500 pl-4 mb-6 flex items-center">
+                <span class="bg-brand-100 text-brand-700 rounded-full w-8 h-8 inline-flex items-center justify-center text-sm mr-3">6</span>現地情報・注意事項
+            </h2>
+            
+            <div class="space-y-6">
+                <!-- 気候・服装 -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 flex flex-col md:flex-row gap-4">
+                    <div class="md:w-16 flex-shrink-0 flex items-center justify-center bg-blue-50 rounded-lg p-3 text-blue-500">
+                        <i class="fa-solid fa-temperature-half text-3xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 mb-2">気候と服装・湿度対策</h3>
+                        <p class="text-sm text-slate-600 mb-2">ラスベガスの1月は砂漠気候のため、朝晩は冷え込み（最低気温2〜4℃）、日中は少し暖かくなります（最高気温14〜15℃）。</p>
+                        <p class="text-sm text-slate-600">外は寒く、ホテルや会場などの室内は暖房が強く効いているため、<strong>脱ぎ着しやすい重ね着（レイヤード）</strong>が推奨されます。また非常に乾燥するため、リップクリームやハンドクリーム、こまめな水分補給など<strong>徹底した湿度・乾燥対策</strong>が必要です。</p>
+                    </div>
+                </div>
+
+                <!-- 翻訳アプリ -->
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 flex flex-col md:flex-row gap-4">
+                    <div class="md:w-16 flex-shrink-0 flex items-center justify-center bg-brand-50 rounded-lg p-3 text-brand-500">
+                        <i class="fa-solid fa-language text-3xl"></i>
+                    </div>
+                    <div class="w-full">
+                        <h3 class="font-bold text-slate-800 mb-2">展示・セッションでの翻訳アプリ活用</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                            <div class="bg-slate-50 p-3 rounded border border-slate-100">
+                                <h4 class="font-bold text-sm text-brand-700 mb-1">【セッション】YY文字起こし推奨</h4>
+                                <p class="text-xs text-slate-600">リアルタイムの文字起こしに活用してください。録音機能もあるため、後からAI要約を利用して内容の確認や社内展開に利用すると効率的です。</p>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded border border-slate-100">
+                                <h4 class="font-bold text-sm text-brand-700 mb-1">【展示・対人】Google翻訳推奨</h4>
+                                <p class="text-xs text-slate-600">対人での質疑応答や説明には<strong>「会話翻訳」</strong>機能、ブースにある英語の説明パネルや資料には<strong>「カメラ翻訳」</strong>機能が非常に有用です。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- チップ -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                        <h3 class="font-bold text-slate-800 mb-3 flex items-center"><i class="fa-solid fa-coins text-amber-500 mr-2"></i>チップの目安</h3>
+                        <ul class="space-y-3 text-sm text-slate-700">
+                            <li class="flex justify-between border-b border-slate-50 pb-2"><span>ホテル（ベッドメイク）</span><span class="font-medium">$3〜5 / 日</span></li>
+                            <li class="flex justify-between border-b border-slate-50 pb-2"><span>ベルボーイ（荷物運搬）</span><span class="font-medium">$1〜2 / 荷物1つ</span></li>
+                            <li class="flex justify-between border-b border-slate-50 pb-2"><span>タクシー・Uber</span><span class="font-medium">運賃の15〜20%</span></li>
+                            <li class="flex justify-between"><span>レストラン（テーブル）</span><span class="font-medium">合計金額の18〜22%</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- 安全注意事項 -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                        <h3 class="font-bold text-slate-800 mb-3 flex items-center"><i class="fa-solid fa-shield-halved text-red-500 mr-2"></i>安全・その他の注意事項</h3>
+                        <ul class="space-y-2 text-sm text-slate-700 list-disc pl-5">
+                            <li>基本的に大通りは安全ですが、人混みではスリや置き引きに十分注意してください。</li>
+                            <li><strong class="text-red-600">キャラクター写真に注意：</strong>ストリップ通りにいる「コスプレしたキャラクター」の写真を撮ったり一緒に撮影すると、高額なチップ（$5〜20以上）を要求されるトラブルが頻発しています。不要な場合は撮影を避け、きっぱり断りましょう。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 入国審査・英会話フレーズ -->
+        <section id="phrases" class="scroll-mt-24">
+            <h2 class="text-2xl font-bold text-slate-800 border-l-4 border-brand-500 pl-4 mb-6 flex items-center">
+                <span class="bg-brand-100 text-brand-700 rounded-full w-8 h-8 inline-flex items-center justify-center text-sm mr-3">7</span>入国審査・英会話フレーズ
+            </h2>
+
+            <div class="space-y-8">
+                <!-- 入国審査 -->
+                <div>
+                    <h3 class="font-bold text-purple-800 bg-purple-100 px-4 py-2 rounded-t-lg border border-purple-200 border-b-0 flex items-center"><i class="fa-solid fa-passport mr-2"></i>入国審査 (Immigration) 対策</h3>
+                    <div class="bg-white border border-purple-200 rounded-b-lg p-5 space-y-5">
+                        
+                        <div class="border-b border-slate-100 pb-4">
+                            <h4 class="font-bold text-slate-800 text-sm mb-2">滞在目的 (Purpose)</h4>
+                            <p class="text-sm font-medium text-slate-600 mb-1">Q: What is the purpose of your visit? <span class="text-xs font-normal text-slate-400">（滞在の目的は何ですか？）</span></p>
+                            <div class="bg-slate-50 p-2 rounded text-sm mb-1">
+                                <span class="text-xs bg-slate-200 px-1 rounded mr-2">丁寧</span> <span class="font-semibold text-brand-700">"I am here for business to attend CES 2027."</span> <span class="text-xs text-slate-500 ml-1">（仕事でCES 2027の視察に来ました。）</span>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded text-sm">
+                                <span class="text-xs bg-slate-200 px-1 rounded mr-2">簡易</span> <span class="font-semibold text-brand-700">"Business." / "For CES."</span> <span class="text-xs text-slate-500 ml-1">（仕事です。/ CESのためです。）</span>
+                            </div>
+                        </div>
+
+                        <div class="border-b border-slate-100 pb-4">
+                            <h4 class="font-bold text-slate-800 text-sm mb-2">滞在期間 (Duration)</h4>
+                            <p class="text-sm font-medium text-slate-600 mb-1">Q: How long will you be staying? <span class="text-xs font-normal text-slate-400">（どのくらい滞在しますか？）</span></p>
+                            <div class="bg-slate-50 p-2 rounded text-sm mb-1">
+                                <span class="text-xs bg-slate-200 px-1 rounded mr-2">丁寧</span> <span class="font-semibold text-brand-700">"I will be staying for 5 days. I arrive today and leave on January 9th."</span>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded text-sm">
+                                <span class="text-xs bg-slate-200 px-1 rounded mr-2">簡易</span> <span class="font-semibold text-brand-700">"5 days." / "Until January 9th."</span> <span class="text-xs text-slate-500 ml-1">（5日間です。/ 1月9日までです。）</span>
+                            </div>
+                        </div>
+
+                        <div class="border-b border-slate-100 pb-4">
+                            <h4 class="font-bold text-slate-800 text-sm mb-2">宿泊先 (Accommodation)</h4>
+                            <p class="text-sm font-medium text-slate-600 mb-1">Q: Where are you staying? <span class="text-xs font-normal text-slate-400">（どこに泊まりますか？）</span></p>
+                            <div class="bg-slate-50 p-2 rounded text-sm mb-1">
+                                <span class="text-xs bg-slate-200 px-1 rounded mr-2">丁寧</span> <span class="font-semibold text-brand-700">"I am staying at the Las Vegas Hilton at Resorts World."</span>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded text-sm">
+                                <span class="text-xs bg-slate-200 px-1 rounded mr-2">簡易</span> <span class="font-semibold text-brand-700">"Resorts World." / "Hilton."</span> <span class="text-xs text-slate-500 ml-1">（リゾートワールドです。/ ヒルトンです。）</span>
+                            </div>
+                        </div>
+
+                        <div class="border-b border-slate-100 pb-4">
+                            <h4 class="font-bold text-slate-800 text-sm mb-2">職業・会社 (Occupation/Company)</h4>
+                            <p class="text-sm font-medium text-slate-600 mb-1">Q: What is your occupation? <span class="text-xs font-normal text-slate-400">（職業は何ですか？）</span></p>
+                            <div class="bg-slate-50 p-2 rounded text-sm mb-1">
+                                <span class="text-xs bg-slate-200 px-1 rounded mr-2">丁寧</span> <span class="font-semibold text-brand-700">"I work for Sanken Setsubi Kogyo. We are a building facilities engineering company."</span>
+                            </div>
+                            <div class="bg-slate-50 p-2 rounded text-sm">
+                                <span class="text-xs bg-slate-200 px-1 rounded mr-2">簡易</span> <span class="font-semibold text-brand-700">"Engineer." / "Office worker." / "Construction company."</span> <span class="text-xs text-slate-500 ml-1">（エンジニアです。/ 会社員です。/ 建設会社です。）</span>
+                            </div>
+                        </div>
+
+                        <div class="pb-2">
+                            <h4 class="font-bold text-slate-800 text-sm mb-2">その他のよくある質問 / 指示用語</h4>
+                            <ul class="text-sm space-y-3 text-slate-700">
+                                <li>
+                                    <span class="font-medium text-slate-800">帰りのチケット (Return Ticket):</span><br>
+                                    Q: Do you have a return ticket? <i class="fa-solid fa-arrow-right text-slate-300 mx-1"></i> A: <span class="font-semibold text-brand-700">"Yes, here it is."</span> (はい、これです。)
+                                </li>
+                                <li>
+                                    <span class="font-medium text-slate-800">同行者 (Companions):</span><br>
+                                    Q: Are you traveling alone? <i class="fa-solid fa-arrow-right text-slate-300 mx-1"></i> A: <span class="font-semibold text-brand-700">"No, with my colleagues."</span> (いいえ、同僚と一緒です。)
+                                </li>
+                                <li>
+                                    <span class="font-medium text-slate-800">過去の渡航歴 (Visit History):</span><br>
+                                    Q: Have you visited the United States before? <i class="fa-solid fa-arrow-right text-slate-300 mx-1"></i> A: <span class="font-semibold text-brand-700">"Yes, several times." / "No, first time."</span>
+                                </li>
+                            </ul>
+                            <div class="mt-4 flex flex-wrap gap-2 text-xs">
+                                <span class="bg-purple-50 text-purple-700 px-2 py-1 rounded border border-purple-200">Fingerprints (指紋)</span>
+                                <span class="bg-purple-50 text-purple-700 px-2 py-1 rounded border border-purple-200">Right hand / Left hand (右手/左手)</span>
+                                <span class="bg-purple-50 text-purple-700 px-2 py-1 rounded border border-purple-200">Look at the camera (カメラを見て)</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- シーン別フレーズ -->
+                <div>
+                    <h3 class="font-bold text-teal-800 bg-teal-100 px-4 py-2 rounded-t-lg border border-teal-200 border-b-0 flex items-center"><i class="fa-regular fa-comments mr-2"></i>シーン別 役立つ英語フレーズ集</h3>
+                    <div class="bg-white border border-teal-200 rounded-b-lg p-5 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        <!-- ホテル -->
+                        <div>
+                            <h4 class="font-bold text-slate-800 border-b border-teal-100 pb-1 mb-3 text-sm">ホテル (Hotel)</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li>
+                                    <div class="font-semibold text-brand-700">Check-in, please.</div>
+                                    <div class="text-xs text-slate-500">チェックインをお願いします。</div>
+                                </li>
+                                <li>
+                                    <div class="font-semibold text-brand-700">Could you keep my luggage?</div>
+                                    <div class="text-xs text-slate-500">荷物を預かってもらえますか？</div>
+                                </li>
+                                <li>
+                                    <div class="font-semibold text-brand-700">What is the Wi-Fi password?</div>
+                                    <div class="text-xs text-slate-500">Wi-Fiのパスワードは何ですか？</div>
+                                </li>
+                                <li>
+                                    <div class="font-semibold text-brand-700">Check-out, please.</div>
+                                    <div class="text-xs text-slate-500">チェックアウトをお願いします。</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 食事 -->
+                        <div>
+                            <h4 class="font-bold text-slate-800 border-b border-teal-100 pb-1 mb-3 text-sm">食事 (Dining)</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li>
+                                    <div class="font-semibold text-brand-700">Table for five, please.</div>
+                                    <div class="text-xs text-slate-500">5人です。</div>
+                                </li>
+                                <li>
+                                    <div class="font-semibold text-brand-700">Can I have the menu?</div>
+                                    <div class="text-xs text-slate-500">メニューをもらえますか？</div>
+                                </li>
+                                <li>
+                                    <div class="font-semibold text-brand-700">I'll have this.</div>
+                                    <div class="text-xs text-slate-500">これをお願いします。(メニューを指差しながら)</div>
+                                </li>
+                                <li>
+                                    <div class="font-semibold text-brand-700">Check, please.</div>
+                                    <div class="text-xs text-slate-500">お会計をお願いします。</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 移動 -->
+                        <div>
+                            <h4 class="font-bold text-slate-800 border-b border-teal-100 pb-1 mb-3 text-sm">移動 (Transport)</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li>
+                                    <div class="font-semibold text-brand-700">To [Destination], please.</div>
+                                    <div class="text-xs text-slate-500">[行き先] までお願いします。</div>
+                                </li>
+                                <li>
+                                    <div class="font-semibold text-brand-700">How long does it take?</div>
+                                    <div class="text-xs text-slate-500">どのくらいかかりますか？</div>
+                                </li>
+                                <li>
+                                    <div class="font-semibold text-brand-700">Please take me to the airport.</div>
+                                    <div class="text-xs text-slate-500">空港までお願いします。</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- CES -->
+                        <div>
+                            <h4 class="font-bold text-slate-800 border-b border-teal-100 pb-1 mb-3 text-sm">CES会場 (CES)</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li>
+                                    <div class="font-semibold text-brand-700">May I take a photo?</div>
+                                    <div class="text-xs text-slate-500">写真を撮ってもいいですか？</div>
+                                </li>
+                                <li>
+                                    <div class="font-semibold text-brand-700">Can I have your business card?</div>
+                                    <div class="text-xs text-slate-500">名刺をいただけますか？</div>
+                                </li>
+                                <li>
+                                    <div class="font-semibold text-brand-700">Can you show me a demo?</div>
+                                    <div class="text-xs text-slate-500">デモを見せてもらえますか？</div>
+                                </li>
+                                <li>
+                                    <div class="font-semibold text-brand-700">What is this product?</div>
+                                    <div class="text-xs text-slate-500">これはどんな製品ですか？</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 緊急連絡・現地サポート -->
+        <section id="emergency" class="scroll-mt-24">
+            <h2 class="text-2xl font-bold text-red-700 border-l-4 border-red-600 pl-4 mb-6 flex items-center">
+                <span class="bg-red-100 text-red-700 rounded-full w-8 h-8 inline-flex items-center justify-center text-sm mr-3"><i class="fa-solid fa-triangle-exclamation"></i></span>緊急連絡・現地サポート
+            </h2>
+            
+            <div class="bg-red-50 border border-red-200 rounded-xl p-6 mb-6">
+                <p class="font-bold text-red-800 mb-4">緊急事態・体調不良 事故・盗難時は直ちに連絡してください。</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 現地公的機関 -->
+                    <div class="bg-white rounded-lg p-4 border border-red-100 shadow-sm">
+                        <h4 class="font-bold text-slate-800 mb-3 border-b pb-2">現地緊急通報・公的機関</h4>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-center justify-between">
+                                <span class="font-medium">警察・救急・消防</span>
+                                <a href="tel:911" class="font-bold text-red-600 text-lg">911</a>
+                            </li>
+                            <li class="text-xs text-slate-500 text-right pb-2 border-b border-dashed">※「Japanese, please」と伝えてください</li>
+                            <li class="flex justify-between items-start pt-2">
+                                <span class="font-medium text-slate-700">在サンフランシスコ<br>日本国総領事館</span>
+                                <a href="tel:+14157806000" class="text-brand-600 font-medium">+1-415-780-6000</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 病院 -->
+                    <div class="bg-white rounded-lg p-4 border border-red-100 shadow-sm">
+                        <h4 class="font-bold text-slate-800 mb-2 border-b pb-2">推奨病院 (日本語対応・キャッシュレス)</h4>
+                        <p class="text-xs text-red-600 font-bold mb-3">※受診前に必ず保険会社へ連絡をお願いします</p>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex justify-between items-center">
+                                <span class="font-medium text-slate-700">Nippon Clinic Las Vegas</span>
+                                <a href="tel:7029947267" class="text-brand-600 font-medium">(702) 994-7267</a>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <span class="font-medium text-slate-700">Dr. Javier Kamisato</span>
+                                <a href="tel:7024583800" class="text-brand-600 font-medium">(702) 458-3800</a>
+                            </li>
+                            <li class="pt-2 border-t border-dashed">
+                                <span class="text-xs text-slate-500">夜間救急(ER): Sunrise Hospital / UMC</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 社内・関係者連絡先 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-center"><i class="fa-solid fa-building text-brand-500 mr-2"></i>同社内 緊急連絡先</h4>
+                    <p class="text-sm text-slate-500 mb-3">三建設備工業株式会社</p>
+                    <ul class="space-y-3">
+                        <li class="flex justify-between items-center bg-slate-50 p-2 rounded">
+                            <span class="font-medium text-slate-700">新庄 康司</span>
+                            <a href="tel:07040904841" class="text-brand-600 font-medium">070-4090-4841</a>
+                        </li>
+                        <li class="flex justify-between items-center bg-slate-50 p-2 rounded">
+                            <span class="font-medium text-slate-700">荒川 由雄</span>
+                            <a href="tel:08077298225" class="text-brand-600 font-medium">080-7729-8225</a>
+                        </li>
+                        <li class="flex justify-between items-center bg-slate-50 p-2 rounded">
+                            <span class="font-medium text-slate-700">畠山 佳子</span>
+                            <a href="tel:08020621669" class="text-brand-600 font-medium">080-2062-1669</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5">
+                    <h4 class="font-bold text-slate-800 mb-4 flex items-center"><i class="fa-solid fa-headset text-brand-500 mr-2"></i>安全サポートデスク・イベント関連</h4>
+                    <div class="space-y-4">
+                        <div class="border-b pb-3">
+                            <p class="text-sm font-medium text-slate-700">サポートデスク直通 (24時間/日本語)</p>
+                            <a href="tel:+81365509939" class="text-brand-600 font-bold text-lg block mt-1">+81-3-6550-9939</a>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-slate-700 mb-1">イベント担当 / コーディネーター</p>
+                            <p class="text-sm text-slate-800 font-bold">キャディ株式会社 小岡 崇 様</p>
+                            <p class="text-xs text-slate-500 mb-2">滞在期間: 1/5 ~ 1/9</p>
+                            <div class="flex justify-between text-sm">
+                                <a href="tel:07033207804" class="text-brand-600"><i class="fa-solid fa-phone mr-1"></i>070-3320-7804</a>
+                                <a href="#" class="text-brand-600"><i class="fa-regular fa-comment-sms mr-1"></i>SMS送信</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 参加者 緊急連絡先 (個人) -->
+            <div id="personal-emergency" class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 mt-6 hidden">
+                <div class="flex justify-between items-center mb-4 border-b border-slate-100 pb-3">
+                    <h4 class="font-bold text-slate-800 flex items-center"><i class="fa-solid fa-address-book text-brand-500 mr-2"></i>参加者 緊急連絡先（個人）</h4>
+                    <span class="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded border border-slate-200">※随時更新</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- 小柳 雄司 -->
+                    <div class="border border-slate-200 p-4 rounded-lg bg-white shadow-sm">
+                        <div class="font-bold text-brand-700 text-base border-b border-slate-100 pb-2 mb-3">小柳 雄司</div>
+                        <div class="text-sm text-slate-700 space-y-2">
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">氏名</span><span>小柳 紀和子</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">続柄</span><span>妻</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">TEL</span><a href="tel:09061783723" class="text-brand-600 font-semibold hover:underline">090-6178-3723</a></div>
+                        </div>
+                    </div>
+                    <!-- 日比 俊介 -->
+                    <div class="border border-slate-200 p-4 rounded-lg bg-white shadow-sm">
+                        <div class="font-bold text-brand-700 text-base border-b border-slate-100 pb-2 mb-3">日比 俊介</div>
+                        <div class="text-sm text-slate-700 space-y-2">
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">氏名</span><span>日比 由子</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">続柄</span><span>妻</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">TEL</span><a href="tel:09080791916" class="text-brand-600 font-semibold hover:underline">090-8079-1916</a></div>
+                        </div>
+                    </div>
+                    <!-- 香川 祐治 -->
+                    <div class="border border-slate-200 p-4 rounded-lg bg-white shadow-sm">
+                        <div class="font-bold text-brand-700 text-base border-b border-slate-100 pb-2 mb-3">香川 祐治</div>
+                        <div class="text-sm text-slate-700 space-y-2">
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">氏名</span><span>香川 桂子</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">続柄</span><span>妻</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">TEL</span><a href="tel:09061489262" class="text-brand-600 font-semibold hover:underline">090-6148-9262</a></div>
+                        </div>
+                    </div>
+                    <!-- 高橋 渉 -->
+                    <div class="border border-slate-200 p-4 rounded-lg bg-white shadow-sm">
+                        <div class="font-bold text-brand-700 text-base border-b border-slate-100 pb-2 mb-3">高橋 渉</div>
+                        <div class="text-sm text-slate-700 space-y-2">
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">氏名</span><span>高橋 亜里沙</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">続柄</span><span>妻</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">TEL</span><a href="tel:09060364672" class="text-brand-600 font-semibold hover:underline">090-6036-4672</a></div>
+                        </div>
+                    </div>
+                    <!-- 加藤 千尋 -->
+                    <div class="border border-slate-200 p-4 rounded-lg bg-white shadow-sm">
+                        <div class="font-bold text-brand-700 text-base border-b border-slate-100 pb-2 mb-3">加藤 千尋</div>
+                        <div class="text-sm text-slate-700 space-y-2">
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">氏名</span><span>加藤 はるみ</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">続柄</span><span>母</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">TEL</span><a href="tel:09018378033" class="text-brand-600 font-semibold hover:underline">090-1837-8033</a></div>
+                        </div>
+                    </div>
+                    <!-- 末田 風太 -->
+                    <div class="border border-slate-200 p-4 rounded-lg bg-slate-50">
+                        <div class="font-bold text-slate-700 text-base border-b border-slate-200 pb-2 mb-3 flex justify-between items-center">
+                            末田 風太 <span class="text-[10px] text-slate-400 font-normal border border-slate-200 px-1.5 py-0.5 rounded bg-white">確認中</span>
+                        </div>
+                        <div class="text-sm text-slate-400 space-y-2">
+                            <div class="flex justify-between"><span class="text-xs mt-0.5">氏名</span><span>-</span></div>
+                            <div class="flex justify-between"><span class="text-xs mt-0.5">続柄</span><span>-</span></div>
+                            <div class="flex justify-between"><span class="text-xs mt-0.5">TEL</span><span>-</span></div>
+                        </div>
+                    </div>
+                    <!-- 山岸 良章 -->
+                    <div class="border border-slate-200 p-4 rounded-lg bg-slate-50">
+                        <div class="font-bold text-slate-700 text-base border-b border-slate-200 pb-2 mb-3 flex justify-between items-center">
+                            山岸 良章 <span class="text-[10px] text-slate-400 font-normal border border-slate-200 px-1.5 py-0.5 rounded bg-white">確認中</span>
+                        </div>
+                        <div class="text-sm text-slate-400 space-y-2">
+                            <div class="flex justify-between"><span class="text-xs mt-0.5">氏名</span><span>-</span></div>
+                            <div class="flex justify-between"><span class="text-xs mt-0.5">続柄</span><span>-</span></div>
+                            <div class="flex justify-between"><span class="text-xs mt-0.5">TEL</span><span>-</span></div>
+                        </div>
+                    </div>
+                    <!-- 山中 啓悟 -->
+                    <div class="border border-slate-200 p-4 rounded-lg bg-white shadow-sm">
+                        <div class="font-bold text-brand-700 text-base border-b border-slate-100 pb-2 mb-3">山中 啓悟</div>
+                        <div class="text-sm text-slate-700 space-y-2">
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">氏名</span><span>山中 久理</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">続柄</span><span>妻</span></div>
+                            <div class="flex justify-between"><span class="text-slate-500 text-xs mt-0.5">TEL</span><a href="tel:09053906104" class="text-brand-600 font-semibold hover:underline">090-5390-6104</a></div>
+                        </div>
+                    </div>
+                    <!-- 後藤 宏一朗 -->
+                    <div class="border border-slate-200 p-4 rounded-lg bg-slate-50">
+                        <div class="font-bold text-slate-700 text-base border-b border-slate-200 pb-2 mb-3 flex justify-between items-center">
+                            後藤 宏一朗 <span class="text-[10px] text-slate-400 font-normal border border-slate-200 px-1.5 py-0.5 rounded bg-white">確認中</span>
+                        </div>
+                        <div class="text-sm text-slate-400 space-y-2">
+                            <div class="flex justify-between"><span class="text-xs mt-0.5">氏名</span><span>-</span></div>
+                            <div class="flex justify-between"><span class="text-xs mt-0.5">続柄</span><span>-</span></div>
+                            <div class="flex justify-between"><span class="text-xs mt-0.5">TEL</span><span>-</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-8 text-center text-sm mt-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>&copy; 2026 三建設備工業株式会社. CONFIDENTIAL - 内部関係者専用資料</p>
+            <p class="mt-2 text-xs">This document is created for CES 2027 business trip planning purposes only.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-md');
+                nav.classList.remove('shadow-sm');
+            } else {
+                nav.classList.add('shadow-sm');
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // Mobile menu toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on click
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // 提出用モードの切り替え処理
+        let isSubmitMode = false;
+        const modeBtnDesktop = document.getElementById('mode-toggle-btn');
+        const modeBtnMobile = document.getElementById('mobile-mode-toggle-btn');
+        const prepSection = document.getElementById('preparation');
+        const prepLinkDesktop = document.getElementById('nav-prep-desktop');
+        const prepLinkMobile = document.getElementById('nav-prep-mobile');
+        
+        // 追加項目の取得
+        const belongingsSection = document.getElementById('belongings');
+        const belongingsLinkDesktop = document.getElementById('nav-belongings-desktop');
+        const belongingsLinkMobile = document.getElementById('nav-belongings-mobile');
+        
+        const localInfoSection = document.getElementById('local-info');
+        const localLinkDesktop = document.getElementById('nav-local-desktop');
+        const localLinkMobile = document.getElementById('nav-local-mobile');
+        
+        const phrasesSection = document.getElementById('phrases');
+        const phrasesLinkDesktop = document.getElementById('nav-phrases-desktop');
+        const phrasesLinkMobile = document.getElementById('nav-phrases-mobile');
+
+        const personalEmergency = document.getElementById('personal-emergency');
+
+        function toggleSubmitMode() {
+            isSubmitMode = !isSubmitMode;
+            if (isSubmitMode) {
+                // 提出用モード（事前準備・持ち物・現地情報・フレーズ非表示、緊急連絡先表示）
+                prepSection.classList.add('hidden');
+                belongingsSection.classList.add('hidden');
+                localInfoSection.classList.add('hidden');
+                phrasesSection.classList.add('hidden');
+                
+                if (prepLinkDesktop) prepLinkDesktop.classList.add('hidden');
+                if (prepLinkMobile) prepLinkMobile.classList.add('hidden');
+                if (belongingsLinkDesktop) belongingsLinkDesktop.classList.add('hidden');
+                if (belongingsLinkMobile) belongingsLinkMobile.classList.add('hidden');
+                if (localLinkDesktop) localLinkDesktop.classList.add('hidden');
+                if (localLinkMobile) localLinkMobile.classList.add('hidden');
+                if (phrasesLinkDesktop) phrasesLinkDesktop.classList.add('hidden');
+                if (phrasesLinkMobile) phrasesLinkMobile.classList.add('hidden');
+                
+                personalEmergency.classList.remove('hidden');
+
+                // ボタンの見た目変更
+                modeBtnDesktop.innerHTML = '<i class="fa-solid fa-file-lines mr-1"></i>通常表示に戻す';
+                modeBtnDesktop.classList.add('bg-slate-800', 'text-white', 'border-slate-800');
+                modeBtnDesktop.classList.remove('text-slate-600', 'border-slate-300', 'hover:bg-slate-50');
+                
+                modeBtnMobile.innerHTML = '<i class="fa-solid fa-file-lines mr-1"></i>通常表示に戻す';
+                modeBtnMobile.classList.add('bg-slate-800', 'text-white');
+                modeBtnMobile.classList.remove('text-slate-600', 'border-slate-300', 'hover:bg-slate-50');
+            } else {
+                // 通常モード（事前準備・持ち物・現地情報・フレーズ表示、緊急連絡先非表示）
+                prepSection.classList.remove('hidden');
+                belongingsSection.classList.remove('hidden');
+                localInfoSection.classList.remove('hidden');
+                phrasesSection.classList.remove('hidden');
+                
+                if (prepLinkDesktop) prepLinkDesktop.classList.remove('hidden');
+                if (prepLinkMobile) prepLinkMobile.classList.remove('hidden');
+                if (belongingsLinkDesktop) belongingsLinkDesktop.classList.remove('hidden');
+                if (belongingsLinkMobile) belongingsLinkMobile.classList.remove('hidden');
+                if (localLinkDesktop) localLinkDesktop.classList.remove('hidden');
+                if (localLinkMobile) localLinkMobile.classList.remove('hidden');
+                if (phrasesLinkDesktop) phrasesLinkDesktop.classList.remove('hidden');
+                if (phrasesLinkMobile) phrasesLinkMobile.classList.remove('hidden');
+                
+                personalEmergency.classList.add('hidden');
+
+                // ボタンの見た目変更
+                modeBtnDesktop.innerHTML = '<i class="fa-solid fa-file-export mr-1"></i>提出用';
+                modeBtnDesktop.classList.remove('bg-slate-800', 'text-white', 'border-slate-800');
+                modeBtnDesktop.classList.add('text-slate-600', 'border-slate-300', 'hover:bg-slate-50');
+                
+                modeBtnMobile.innerHTML = '<i class="fa-solid fa-file-export mr-1"></i>提出用';
+                modeBtnMobile.classList.remove('bg-slate-800', 'text-white');
+                modeBtnMobile.classList.add('text-slate-600', 'border-slate-300', 'hover:bg-slate-50');
+            }
+        }
+
+        if(modeBtnDesktop) modeBtnDesktop.addEventListener('click', toggleSubmitMode);
+        if(modeBtnMobile) modeBtnMobile.addEventListener('click', toggleSubmitMode);
+    </script>
+</body>
+</html>
